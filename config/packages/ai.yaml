@@ -1,0 +1,20 @@
+ai:
+    platform:
+        gemini:
+            api_key: '%env(GEMINI_API_KEY)%'
+    agent:
+        app:
+            model:
+                class: 'Symfony\AI\Platform\Bridge\Gemini\Gemini'
+                name: !php/const Symfony\AI\Platform\Bridge\Gemini\Gemini::GEMINI_2_FLASH
+            tools:
+                - 'Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch'
+    store:
+        chroma_db:
+            app:
+                collection: '%env(CHROMADB_COLLECTION_NAME)%'
+    indexer:
+        default:
+            model:
+                class: 'Symfony\AI\Platform\Bridge\Gemini\Embeddings'
+                name: !php/const Symfony\AI\Platform\Bridge\Gemini\Embeddings::GEMINI_EMBEDDING_EXP_03_07

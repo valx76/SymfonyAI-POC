@@ -1,0 +1,37 @@
+
+services:
+  php:
+    ports:
+      # HTTP
+      - target: 80
+        published: 80
+        protocol: tcp
+      # HTTPS
+      - target: 443
+        published: 443
+        protocol: tcp
+      # HTTP/3
+      - target: 443
+        published: 443
+        protocol: udp
+
+###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      - "5432:5432"
+###< doctrine/doctrine-bundle ###
+
+###> symfony/mailer ###
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1025"
+      - "8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+###< symfony/mailer ###
+
+  chroma:
+    ports:
+      - "8000:8000"

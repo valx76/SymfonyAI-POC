@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            Chat
+        </div>
+        <div class="card-body">
+            <div class="d-flex">
+                <div class="flex-fill p-3">
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+
+                        {{ form_row(form.user) }}
+                        {{ form_row(form.message) }}
+
+                        <button type="submit" class="btn btn-primary">Send</button>
+                        <a href="{{ path('app_clear') }}" class="btn btn-secondary float-end">Clear history</a>
+                    {{ form_end(form) }}
+                </div>
+                <div class="p-3">
+                    <h5>Data</h5>
+                    <table class="table border" style="font-size:14px;">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Articles</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>John Doe</td>
+                            <td>2021-01-01</td>
+                            <td>Apple, Lemon</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>John Doe</td>
+                            <td>2025-01-01</td>
+                            <td>Kiwi</td>
+                            <td>Pending</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>John Doe</td>
+                            <td>2024-01-01</td>
+                            <td>Lemon, Orange</td>
+                            <td>Cancelled</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Mr Anderson</td>
+                            <td>2022-01-01</td>
+                            <td>Apple, Lemon, Orange</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>Mr Anderson</td>
+                            <td>2023-01-01</td>
+                            <td>Kiwi, Orange</td>
+                            <td>Completed</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr>
+
+            <h5>LLM Agent</h5>
+            <div class="p-4 pb-0 border" style="height:400px;overflow-y:scroll;">
+                {% for message in messages|reverse %}
+                    <fieldset class="border rounded-2 ps-3 mb-4">
+                        <legend class="float-none w-auto px-2 fs-6 ms-2 fw-bold">
+                            {{ constant('class', message) == 'Symfony\\AI\\Platform\\Message\\UserMessage' ? 'User' : 'AI' }}
+                        </legend>
+                        <p class="m-0">
+                            {{ (message.content is iterable ? message.content[0].text : message.content)|markdown_to_html }}
+                        </p>
+                    </fieldset>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
