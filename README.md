@@ -36,3 +36,8 @@ PHP-CS-FIXER:<br>
 
 PHPSTAN / PHPAT (level 10):<br>
 `make phpstan`
+
+## Preview
+
+https://github.com/user-attachments/assets/39f97333-f30b-4b67-ac1b-67665d3db3ed
+
