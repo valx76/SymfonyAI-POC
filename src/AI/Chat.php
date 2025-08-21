@@ -26,7 +26,7 @@ final readonly class Chat
             Message::forSystem(
                 <<<PROMPT
                     You are an helpful assistant that knows about the orders in the system.
-                    To search for content you use the tool 'similarity_search' for generating the answer.
+                    To search for content you use the tool 'user_bounded_similarity_search' for generating the answer.
                     Only use content that you get from searching with that tool or your previous answers.
                     Don't make up information and if you can't find something, just say so.
                     If the user asks for his orders, don't ask to identify him, just return all the orders following the information he gives you.
